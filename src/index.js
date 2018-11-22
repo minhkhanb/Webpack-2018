@@ -1,5 +1,5 @@
 import _ from 'lodash';
-// import './sass/app.scss';
+import './sass/app.scss';
 // import bird from './images/bird.jpg';
 // import Data from './data.xml';
 import printHandler from './print.js';
@@ -12,7 +12,7 @@ function component() {
 
   btn.innerHTML = 'Click me and check console';
   btn.onclick = printHandler;
-  // element.classList.add('hello');
+  element.classList.add('hello');
 
   // var imgBird = new Image();
   // imgBird.src = bird;
@@ -24,11 +24,16 @@ function component() {
   return element;
 }
 
-document.body.appendChild(component());
+// document.body.appendChild(component());
+let element = component();
+document.body.appendChild(element);
 
 if(module.hot) {
   module.hot.accept('./print.js', function() {
     console.log('Accepting the update printHandler module');
-    printHandler();
+    // printHandler();
+    document.body.removeChild(element);
+    element = component();
+    document.body.appendChild(element);
   });
 }

@@ -1,3 +1,3 @@
 export default function printHandler () {
-  console.log('Updating print.js');
+  console.log('Updating print.jd');
 }
