@@ -1,0 +1,14 @@
+@import 'mixins';
+
+$primary-color: #333;
+
+@include font-face('ChakraPetch', '../fonts/ChakraPetch/ChakraPetch-Regular');
+
+.hello {
+  color: $primary-color;
+  background: url('../images/bird.jpg');
+  font-family: 'ChakraPetch';
+}
+img {
+  max-width: 200px;
+}
