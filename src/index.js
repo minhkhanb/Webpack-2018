@@ -9,7 +9,7 @@ if(process.env.NODE_ENV !== 'production') {
   console.log('Look like we are in development mode');
 }
 
-function component() {
+/*function component() {
   // let element = document.createElement('div');
   // var btn = document.createElement('button');
   var element = document.createElement('pre');
@@ -32,11 +32,31 @@ function component() {
   // element.appendChild(btn);
 
   return element;
+}*/
+
+/*function getComponent() {
+  return import(/*webpackChunkName: "lodash"/ 'lodash').then(({ default: _ }) => {
+    var element = document.createElement('div');
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    element.classList.add('hello');
+    return element;
+  }).catch(error => 'An error occurred while loading the component');
+}*/
+
+async function getComponent() {
+  var element = document.createElement('div');
+  const { default: _ } = await import(/*webpackChunkName: "lodash"*/ 'lodash');
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+  element.classList.add('hello');
+  return element;
 }
 
 // document.body.appendChild(component());
-let element = component();
-document.body.appendChild(element);
+/*let element = component();
+document.body.appendChild(element);*/
+getComponent().then(component => {
+  document.body.appendChild(component);
+});
 
 if(module.hot) {
   module.hot.accept('./math.js', function() {
