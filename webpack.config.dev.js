@@ -5,11 +5,11 @@ const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
-  optimization: {
-    usedExports: true
-  },
+  // optimization: {
+  //   usedExports: true
+  // },
   entry: {
-    app: './src/index.js',
+    index: './src/index.js',
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
@@ -19,7 +19,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   output: {
-    filename: '[name].bundle.js',
+    // filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   devtool: 'inline-source-map',
