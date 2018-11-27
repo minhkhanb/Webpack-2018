@@ -3,6 +3,6 @@ export function square(x) {
 }
 
 export function cube(x) {
-  console.log('cube common');
+  console.log('cube common sdfsd  sd ');
   return x * x * x;
 }

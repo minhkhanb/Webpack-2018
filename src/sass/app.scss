@@ -1,9 +1,13 @@
 @import 'mixins';
+@include font-face('ChakraPetch', '../fonts/ChakraPetch/ChakraPetch-Regular');
+@import 'main';
 
 $primary-color: #333;
 
-@include font-face('ChakraPetch', '../fonts/ChakraPetch/ChakraPetch-Regular');
-
+body {
+  font-family: 'ChakraPetch';
+  background: url(../images/bg.jpg) top center / 100% no-repeat;
+}
 .hello {
   color: $primary-color;
   // background: url('../images/bird.jpg');

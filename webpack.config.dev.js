@@ -13,12 +13,11 @@ module.exports = {
   entry: {
     app: './src/index.js'
   },
-  watch: true,
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'Output Management',
-      template: './src/static/index.ejs'
+      template: './src/static/index.html'
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
