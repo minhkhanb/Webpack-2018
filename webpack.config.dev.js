@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
 const webpack = require('webpack');
 
 module.exports = {
@@ -9,19 +11,27 @@ module.exports = {
   //   usedExports: true
   // },
   entry: {
-    index: './src/index.js',
+    app: './src/index.js'
   },
+  watch: true,
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Output Management'
+      title: 'Output Management',
+      template: './src/static/index.ejs'
+    }),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
   output: {
     // filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -30,6 +40,17 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              minimize: true
+            }
+          }
+        ]
+      },
       {
         test: /\.scss$/,
         use: [
@@ -52,27 +73,19 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
+        use: ['file-loader']
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          'file-loader'
-        ]
+        use: ['file-loader']
       },
       {
         test: /\.csv|tsv$/,
-        use: [
-          'csv-loader'
-        ]
+        use: ['csv-loader']
       },
       {
         test: /\.xml$/,
-        use: [
-          'xml-loader'
-        ]
+        use: ['xml-loader']
       }
     ]
   }
